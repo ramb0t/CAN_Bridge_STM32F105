@@ -19,16 +19,10 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-
-#include <can.h>
-#include <gpio.h>
-#include <main.h>
-#include <stm32f1xx_hal_def.h>
-#include <stm32f1xx_hal_flash.h>
-#include <stm32f1xx_hal_gpio.h>
-#include <stm32f1xx_hal_rcc.h>
-#include <stm32f1xx_hal_rcc_ex.h>
-#include <usart.h>
+#include "main.h"
+#include "can.h"
+#include "usart.h"
+#include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -53,7 +47,7 @@
 
 /* USER CODE BEGIN PV */
 
-CAN_TxHeaderTypeDef   TxHeader;
+//CAN_TxHeaderTypeDef   TxHeader;
 CAN_RxHeaderTypeDef   RxHeader;
 uint8_t               TxData[8];
 uint8_t               RxData[8];
@@ -105,7 +99,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_CAN_Start(&hcan1);
+  //HAL_CAN_Start(&hcan1);
   uint8_t count = 0;
 
   /* USER CODE END 2 */
