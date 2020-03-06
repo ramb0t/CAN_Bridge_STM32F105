@@ -1,0 +1,69 @@
+{
+    "configurations": [
+        {
+            "name": "!!! WARNING !!! AUTO-GENERATED FILE, PLEASE DO NOT MODIFY IT AND USE https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags"
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "c:/Users/robth/Documents/Git/CAN_Bridge_STM32F105/CAN_Bridge_F105_CubeMx/include",
+                "c:/Users/robth/Documents/Git/CAN_Bridge_STM32F105/CAN_Bridge_F105_CubeMx/src",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/CMSIS/Include",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/CMSIS/Device/ST/STM32F1xx/Include",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/STM32F1xx_HAL_Driver/Inc",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/Common",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/ak4343",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/cs43l22",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/hx8347d",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/ili9320",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/ili9325",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/lis302dl",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/spfd5408",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/st7735",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/stlm75",
+                "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/stmpe811",
+                "C:/Users/robth/.platformio/packages/tool-unity",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "c:/Users/robth/Documents/Git/CAN_Bridge_STM32F105/CAN_Bridge_F105_CubeMx/include",
+                    "c:/Users/robth/Documents/Git/CAN_Bridge_STM32F105/CAN_Bridge_F105_CubeMx/src",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/CMSIS/Include",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/CMSIS/Device/ST/STM32F1xx/Include",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/STM32F1xx_HAL_Driver/Inc",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/Common",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/ak4343",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/cs43l22",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/hx8347d",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/ili9320",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/ili9325",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/lis302dl",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/spfd5408",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/st7735",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/stlm75",
+                    "C:/Users/robth/.platformio/packages/framework-stm32cube/f1/Drivers/BSP/Components/stmpe811",
+                    "C:/Users/robth/.platformio/packages/tool-unity",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=40201",
+                "STM32F103xE",
+                "STM32F1",
+                "USE_HAL_DRIVER",
+                "F_CPU=72000000L",
+                ""
+            ],
+            "intelliSenseMode": "clang-x64",
+            "compilerPath": "C:/Users/robth/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc.exe",
+            "compilerArgs": [
+                "-mthumb",
+                "-mcpu=cortex-m3",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

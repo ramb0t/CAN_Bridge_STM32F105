@@ -1,0 +1,34 @@
+// AUTOMATICALLY GENERATED FILE. PLEASE DO NOT MODIFY IT MANUALLY
+
+// PIO Unified Debugger
+//
+// Documentation: https://docs.platformio.org/page/plus/debugging.html
+// Configuration: https://docs.platformio.org/page/projectconf/section_env_debug.html
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "platformio-debug",
+            "request": "launch",
+            "name": "PIO Debug",
+            "executable": "c:/Users/robth/Documents/Git/CAN_Bridge_STM32F105/CAN_Bridge_F105_CubeMx/.pio/build/genericSTM32F103RC/firmware.elf",
+            "toolchainBinDir": "C:/Users/robth/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "svdPath": "C:/Users/robth/.platformio/platforms/ststm32/misc/svd/STM32F103xx.svd",
+            "preLaunchTask": {
+                "type": "PlatformIO",
+                "task": "Pre-Debug"
+            },
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "type": "platformio-debug",
+            "request": "launch",
+            "name": "PIO Debug (skip Pre-Debug)",
+            "executable": "c:/Users/robth/Documents/Git/CAN_Bridge_STM32F105/CAN_Bridge_F105_CubeMx/.pio/build/genericSTM32F103RC/firmware.elf",
+            "toolchainBinDir": "C:/Users/robth/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "svdPath": "C:/Users/robth/.platformio/platforms/ststm32/misc/svd/STM32F103xx.svd",
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}
