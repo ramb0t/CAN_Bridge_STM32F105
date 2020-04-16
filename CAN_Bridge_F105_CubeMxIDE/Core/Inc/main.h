@@ -66,10 +66,10 @@ void Error_Handler(void);
 #define LEDG_GPIO_Port GPIOC
 #define LEDR_Pin GPIO_PIN_3
 #define LEDR_GPIO_Port GPIOC
-#define LEDCAN2_Pin GPIO_PIN_8
-#define LEDCAN2_GPIO_Port GPIOB
-#define LEDCAN1_Pin GPIO_PIN_9
+#define LEDCAN1_Pin GPIO_PIN_8
 #define LEDCAN1_GPIO_Port GPIOB
+#define LEDCAN2_Pin GPIO_PIN_9
+#define LEDCAN2_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

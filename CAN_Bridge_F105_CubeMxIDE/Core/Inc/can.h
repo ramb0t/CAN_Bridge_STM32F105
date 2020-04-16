@@ -32,8 +32,6 @@
 
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
-extern CAN_TxHeaderTypeDef   TxHeader;
-
 
 /* USER CODE BEGIN Private defines */
 

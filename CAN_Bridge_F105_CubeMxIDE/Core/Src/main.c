@@ -23,6 +23,7 @@
 #include "can.h"
 #include "usart.h"
 #include "gpio.h"
+#include "string.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -47,17 +48,48 @@
 
 /* USER CODE BEGIN PV */
 
-//CAN_TxHeaderTypeDef   TxHeader;
-CAN_RxHeaderTypeDef   RxHeader;
-uint8_t               TxData[8];
-uint8_t               RxData[8];
-uint32_t              TxMailbox;
+CAN_TxHeaderTypeDef   TxHeader1;
+CAN_TxHeaderTypeDef   TxHeader2;
+CAN_RxHeaderTypeDef   RxHeader1;
+CAN_RxHeaderTypeDef   RxHeader2;
+uint8_t               TxData1[8];
+uint8_t               TxData2[8];
+uint8_t               RxData1[8];
+uint8_t               RxData2[8];
+uint32_t              TxMailbox1;
+uint32_t              TxMailbox2;
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+/* UART handler declaration */
+UART_HandleTypeDef UartHandle;
+
+/* Private function prototypes -----------------------------------------------*/
+#ifdef __GNUC__
+  /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
+     set to 'Yes') calls __io_putchar() */
+  #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+  #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+/**
+  * @brief  Retargets the C library printf function to the USART.
+  * @param  None
+  * @retval None
+  */
+PUTCHAR_PROTOTYPE
+{
+  /* Place your implementation of fputc here */
+  /* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+
+  return ch;
+}
+void debugPrint();
+void debugPrintln();
 
 /* USER CODE END PFP */
 
@@ -102,6 +134,26 @@ int main(void)
   //HAL_CAN_Start(&hcan1);
   uint8_t count = 0;
 
+  /* Output a message on Hyperterminal using printf function */
+  printf("\n\r UART Printf Example: retarget the C library printf function to the UART\n\r");
+  printf("** Test finished successfully. ** \n\r");
+
+  /* Configure Transmission process */
+  TxHeader1.StdId = 0x321;
+  TxHeader1.ExtId = 0x01;
+  TxHeader1.RTR = CAN_RTR_DATA;
+  TxHeader1.IDE = CAN_ID_STD;
+  TxHeader1.DLC = 2;
+  TxHeader1.TransmitGlobalTime = DISABLE;
+
+  /* Configure Transmission process */
+  TxHeader2.StdId = 0x322;
+  TxHeader2.ExtId = 0x01;
+  TxHeader2.RTR = CAN_RTR_DATA;
+  TxHeader2.IDE = CAN_ID_STD;
+  TxHeader2.DLC = 2;
+  TxHeader2.TransmitGlobalTime = DISABLE;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -132,18 +184,69 @@ int main(void)
 //
 //	  HAL_Delay(250); //Delay 1 Seconds
 
-	  TxData[0] = 0xBE;
-	  TxData[1] = count++;
+	  TxData1[0] = 0xBE;
+	  TxData1[1] = count++;
+
+	  TxData2[0] = 0xEF;
+	  TxData2[1] = count++;
 
 	  HAL_GPIO_TogglePin(LEDCAN1_GPIO_Port,LEDCAN1_Pin);
       /* Start the Transmission process */
-      if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox) != HAL_OK)
+      if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader1, TxData1, &TxMailbox1) != HAL_OK)
       {
         /* Transmission request Error */
-        //Error_Handler();
+        Error_Handler();
       }
+      printf("\n\r TxData1: %x - %x \n\r", TxData1[0], TxData1[1]);
+
       HAL_GPIO_TogglePin(LEDCAN1_GPIO_Port,LEDCAN1_Pin);
 
+      HAL_Delay(10);
+
+	  HAL_GPIO_TogglePin(LEDCAN2_GPIO_Port,LEDCAN2_Pin);
+      /* Start the Transmission process */
+      if (HAL_CAN_AddTxMessage(&hcan2, &TxHeader2, TxData2, &TxMailbox2) != HAL_OK)
+      {
+        /* Transmission request Error */
+        Error_Handler();
+      }
+ 	  printf("\n\r TxData2: %x - %x \n\r", TxData2[0], TxData2[1]);
+
+      HAL_GPIO_TogglePin(LEDCAN2_GPIO_Port,LEDCAN2_Pin);
+
+      HAL_Delay(10);
+
+      /* Receive */
+      if (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) != 0){
+		 if (HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &RxHeader1, RxData1) != HAL_OK)
+		 {
+		   /* Reception Error */
+		   Error_Handler();
+		   printf("CAN1 RX: Error!");
+
+		 }
+		 printf("CAN1 RX: %lx:%x%x \n\r", RxHeader1.StdId, RxData1[0], RxData1[1]);
+
+      }
+
+      if (HAL_CAN_GetRxFifoFillLevel(&hcan2, CAN_RX_FIFO1) != 0){
+		 if (HAL_CAN_GetRxMessage(&hcan2, CAN_RX_FIFO1, &RxHeader2, RxData2) != HAL_OK)
+		 {
+		   /* Reception Error */
+		   Error_Handler();
+		   printf("CAN2 RX: Error!");
+		 }
+		 printf("CAN2 RX: %lx:%x%x \n\r", RxHeader2.StdId, RxData2[0], RxData2[1]);
+
+      }
+
+
+
+
+
+      //debugPrint(&huart1, "oi, mate!");        // print
+      //debugPrint(&huart1, "\r\n");            // manual new line
+      //debugPrintln(&huart1, "how are you?");  // print full line
 
     /* USER CODE END WHILE */
 
@@ -192,6 +295,18 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+void debugPrint(UART_HandleTypeDef *huart, char _out[])
+{
+	HAL_UART_Transmit(huart, (uint8_t *) _out, strlen(_out), 10);
+}
+
+
+void debugPrintln(UART_HandleTypeDef *huart, char _out[])
+{
+	HAL_UART_Transmit(huart, (uint8_t *) _out, strlen(_out), 10);
+	char newline[2] = "\r\n";
+	HAL_UART_Transmit(huart, (uint8_t *) newline, 2, 10);
+}
 /* USER CODE END 4 */
 
 /**
