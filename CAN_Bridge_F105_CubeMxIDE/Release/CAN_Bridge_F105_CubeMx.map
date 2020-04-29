@@ -124,6 +124,8 @@ Discarded input sections
                 0x0000000000000000       0x1c Core/Src/main.o
  .text.debugPrintln
                 0x0000000000000000       0x30 Core/Src/main.o
+ .text.transformCAN1
+                0x0000000000000000       0x30 Core/Src/main.o
  .text          0x0000000000000000        0x0 Core/Src/stm32f1xx_hal_msp.o
  .data          0x0000000000000000        0x0 Core/Src/stm32f1xx_hal_msp.o
  .bss           0x0000000000000000        0x0 Core/Src/stm32f1xx_hal_msp.o

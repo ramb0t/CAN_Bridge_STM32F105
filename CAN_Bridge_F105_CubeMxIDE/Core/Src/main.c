@@ -23,7 +23,6 @@
 #include "can.h"
 #include "usart.h"
 #include "gpio.h"
-#include "string.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -63,6 +62,7 @@ uint32_t              TxMailbox2;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 /* UART handler declaration */
 UART_HandleTypeDef UartHandle;
@@ -90,6 +90,7 @@ PUTCHAR_PROTOTYPE
 }
 void debugPrint();
 void debugPrintln();
+void transformCAN1();
 
 /* USER CODE END PFP */
 
@@ -129,6 +130,9 @@ int main(void)
   MX_CAN1_Init();
   MX_CAN2_Init();
   MX_USART1_UART_Init();
+
+  /* Initialize interrupts */
+  MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
   //HAL_CAN_Start(&hcan1);
@@ -293,6 +297,20 @@ void SystemClock_Config(void)
   __HAL_RCC_PLLI2S_ENABLE();
 }
 
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* CAN1_RX0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
+  /* CAN2_RX0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(CAN2_RX0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
+}
+
 /* USER CODE BEGIN 4 */
 
 void debugPrint(UART_HandleTypeDef *huart, char _out[])
@@ -306,6 +324,29 @@ void debugPrintln(UART_HandleTypeDef *huart, char _out[])
 	HAL_UART_Transmit(huart, (uint8_t *) _out, strlen(_out), 10);
 	char newline[2] = "\r\n";
 	HAL_UART_Transmit(huart, (uint8_t *) newline, 2, 10);
+}
+
+void CAN1_RX0_IRQHandler(){
+
+}
+
+/**
+  * @brief  This function transforms the CAN bus message before it is retransmitted.
+  * @retval None
+  */
+void transformCAN1(){
+	switch(RxHeader1.StdId){
+	case 0x111:
+		TxHeader2.StdId = 0x111;
+		TxHeader2.DLC = RxHeader1.DLC;
+		TxData2[0] = RxData1[0];
+
+
+		break;
+	default:
+		break;
+	}
+
 }
 /* USER CODE END 4 */
 
