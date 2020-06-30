@@ -154,27 +154,64 @@ int main(void)
   TxHeader2.DLC = 2;
   TxHeader2.TransmitGlobalTime = DISABLE;
 
+  HAL_GPIO_TogglePin(LEDR_GPIO_Port,LEDR_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
+  HAL_GPIO_TogglePin(LEDG_GPIO_Port,LEDG_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
+  HAL_GPIO_TogglePin(LEDB_GPIO_Port,LEDB_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
+  HAL_GPIO_TogglePin(LEDO_GPIO_Port,LEDO_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
+  HAL_GPIO_TogglePin(LEDCAN1_GPIO_Port,LEDCAN1_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
+  HAL_GPIO_TogglePin(LEDCAN2_GPIO_Port,LEDCAN2_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
+
+  HAL_GPIO_TogglePin(LEDR_GPIO_Port,LEDR_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
+  HAL_GPIO_TogglePin(LEDG_GPIO_Port,LEDG_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
+  HAL_GPIO_TogglePin(LEDB_GPIO_Port,LEDB_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
+  HAL_GPIO_TogglePin(LEDO_GPIO_Port,LEDO_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
+  HAL_GPIO_TogglePin(LEDCAN1_GPIO_Port,LEDCAN1_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
+  HAL_GPIO_TogglePin(LEDCAN2_GPIO_Port,LEDCAN2_Pin); //Toggle LED
+  HAL_Delay(250); //Delay 1 Seconds
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_TogglePin(LEDR_GPIO_Port,LEDR_Pin); //Toggle LED
-
-	  HAL_Delay(250); //Delay 1 Seconds
-
-	  HAL_GPIO_TogglePin(LEDG_GPIO_Port,LEDG_Pin); //Toggle LED
-
-	  HAL_Delay(250); //Delay 1 Seconds
-
-	  HAL_GPIO_TogglePin(LEDB_GPIO_Port,LEDB_Pin); //Toggle LED
-
-	  HAL_Delay(250); //Delay 1 Seconds
-
-	  HAL_GPIO_TogglePin(LEDO_GPIO_Port,LEDO_Pin); //Toggle LED
-
-	  HAL_Delay(250); //Delay 1 Seconds
+//	  HAL_GPIO_TogglePin(LEDR_GPIO_Port,LEDR_Pin); //Toggle LED
+//
+//	  HAL_Delay(250); //Delay 1 Seconds
+//
+//	  HAL_GPIO_TogglePin(LEDG_GPIO_Port,LEDG_Pin); //Toggle LED
+//
+//	  HAL_Delay(250); //Delay 1 Seconds
+//
+//	  HAL_GPIO_TogglePin(LEDB_GPIO_Port,LEDB_Pin); //Toggle LED
+//
+//	  HAL_Delay(250); //Delay 1 Seconds
+//
+//	  HAL_GPIO_TogglePin(LEDO_GPIO_Port,LEDO_Pin); //Toggle LED
+//
+//	  HAL_Delay(250); //Delay 1 Seconds
 
 //	  HAL_GPIO_TogglePin(LEDCAN1_GPIO_Port,LEDCAN1_Pin); //Toggle LED
 //
@@ -184,61 +221,98 @@ int main(void)
 //
 //	  HAL_Delay(250); //Delay 1 Seconds
 
-	  TxData1[0] = 0xBE;
-	  TxData1[1] = count++;
+//	  TxData1[0] = 0xBE;
+//	  TxData1[1] = count++;
+//
+//	  TxData2[0] = 0xEF;
+//	  TxData2[1] = count++;
 
-	  TxData2[0] = 0xEF;
-	  TxData2[1] = count++;
 
-	  HAL_GPIO_TogglePin(LEDCAN1_GPIO_Port,LEDCAN1_Pin);
-      /* Start the Transmission process */
-      if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader1, TxData1, &TxMailbox1) != HAL_OK)
-      {
-        /* Transmission request Error */
-        Error_Handler();
-      }
-      printf("\n\r TxData1: %x - %x \n\r", TxData1[0], TxData1[1]);
-
-      HAL_GPIO_TogglePin(LEDCAN1_GPIO_Port,LEDCAN1_Pin);
-
-      HAL_Delay(10);
-
-	  HAL_GPIO_TogglePin(LEDCAN2_GPIO_Port,LEDCAN2_Pin);
-      /* Start the Transmission process */
-      if (HAL_CAN_AddTxMessage(&hcan2, &TxHeader2, TxData2, &TxMailbox2) != HAL_OK)
-      {
-        /* Transmission request Error */
-        Error_Handler();
-      }
- 	  printf("\n\r TxData2: %x - %x \n\r", TxData2[0], TxData2[1]);
-
-      HAL_GPIO_TogglePin(LEDCAN2_GPIO_Port,LEDCAN2_Pin);
-
-      HAL_Delay(10);
-
-      /* Receive */
+      /* Receive CAN1 */
       if (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) != 0){
 		 if (HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &RxHeader1, RxData1) != HAL_OK)
 		 {
 		   /* Reception Error */
+			 HAL_GPIO_TogglePin(LEDR_GPIO_Port,LEDR_Pin); //Toggle LED
 		   Error_Handler();
 		   printf("CAN1 RX: Error!");
 
 		 }
-		 printf("CAN1 RX: %lx:%x%x \n\r", RxHeader1.StdId, RxData1[0], RxData1[1]);
+		 //printf("CAN1 RX: %lx:%x%x \n\r", RxHeader1.StdId, RxData1[0], RxData1[1]);
+
+//		 if(RxHeader1.StdId == 0x7F1){
+//			 RxData1[0] = 0x42; // SOC
+//		 }
+		 //if(RxHeader2.StdId != 0x588){
+		 //printf("CAN_D %lx\n", RxHeader1.StdId);
+		 //}
+
+		 HAL_GPIO_TogglePin(LEDCAN2_GPIO_Port,LEDCAN2_Pin);
+		 /* Start the Transmission process CAN2 */
+		 if (HAL_CAN_AddTxMessage(&hcan2, &RxHeader1, RxData1, &TxMailbox2) != HAL_OK)
+		 {
+	 		/* Transmission request Error */
+			 HAL_GPIO_TogglePin(LEDR_GPIO_Port,LEDR_Pin); //Toggle LED
+	 		Error_Handler();
+		 }
+		 //printf("\n\r CAN2 TX: %lx:%x%x \n\r",  RxHeader1.StdId, RxData1[0], RxData1[1]);
+
+		 HAL_GPIO_TogglePin(LEDCAN2_GPIO_Port,LEDCAN2_Pin);
+
 
       }
 
+      /* Receive CAN2 */
       if (HAL_CAN_GetRxFifoFillLevel(&hcan2, CAN_RX_FIFO1) != 0){
 		 if (HAL_CAN_GetRxMessage(&hcan2, CAN_RX_FIFO1, &RxHeader2, RxData2) != HAL_OK)
 		 {
 		   /* Reception Error */
+			 HAL_GPIO_TogglePin(LEDR_GPIO_Port,LEDR_Pin); //Toggle LED
 		   Error_Handler();
 		   printf("CAN2 RX: Error!");
 		 }
-		 printf("CAN2 RX: %lx:%x%x \n\r", RxHeader2.StdId, RxData2[0], RxData2[1]);
+		 if(RxHeader2.StdId == 0x588){
+			 if(RxData2[0] == 0x4b && RxData2[1] == 0x30 && RxData2[2] == 0x20 && RxData2[3] == 0x10){
+			 //printf("CAN_M %lx\n", RxHeader2.StdId);
+				 //printf("CAN_M RX: %lx:%x %x %x %x %x %x %x %x\n", RxHeader2.StdId, RxData2[0], RxData2[1], RxData2[2], RxData2[3], RxData2[4], RxData2[5], RxData2[6], RxData2[7]);
+				 RxData2[4] = 0x9A;
+				 RxData2[5] = 0x06;
+			 }else if (RxData2[0] == 0x4b && RxData2[1] == 0x33 && RxData2[2] == 0x20 && RxData2[3] == 0x01) { //
+				 printf("CAN_M RX: %lx:%x %x %x %x %x %x %x %x\n", RxHeader2.StdId, RxData2[0], RxData2[1], RxData2[2], RxData2[3], RxData2[4], RxData2[5], RxData2[6], RxData2[7]);
+				 RxData2[4] = 0x0a;
+				 //RxData2[5] = 0x01;
+			}else{
+				//RxData2[4] = 0x28;
+			}
+		 }
 
+
+		 if(RxHeader2.StdId == 0x7F1){
+			 RxData2[0] = 0x33;
+		 }
+
+
+
+		 HAL_GPIO_TogglePin(LEDCAN1_GPIO_Port,LEDCAN1_Pin);
+	     /* Start the Transmission process CAN1*/
+	     if (HAL_CAN_AddTxMessage(&hcan1, &RxHeader2, RxData2, &TxMailbox1) != HAL_OK)
+	     {
+	       /* Transmission request Error */
+	    	 HAL_GPIO_TogglePin(LEDR_GPIO_Port,LEDR_Pin); //Toggle LED
+	       Error_Handler();
+	     }
+	     //printf("\n\r TxData1: %x - %x \n\r", TxData1[0], TxData1[1]);
+
+	      HAL_GPIO_TogglePin(LEDCAN1_GPIO_Port,LEDCAN1_Pin);
       }
+
+
+
+
+
+
+      //HAL_Delay(10);
+
 
 
 

@@ -1,6 +1,6 @@
 main.c:83:1:__io_putchar	16	static
-main.c:262:6:SystemClock_Config	88	static
-main.c:105:5:main	24	static
-main.c:298:6:debugPrint	16	static
-main.c:304:6:debugPrintln	24	static
-main.c:316:6:Error_Handler	0	static
+main.c:336:6:SystemClock_Config	88	static
+main.c:105:5:main	56	static
+main.c:372:6:debugPrint	16	static
+main.c:378:6:debugPrintln	24	static
+main.c:390:6:Error_Handler	0	static
